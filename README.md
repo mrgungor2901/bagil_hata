@@ -1,6 +1,6 @@
 # Bağıl Hata Hesaplayıcısı
 
-Kapsamlı Türkçe dokümantasyon — Bu proje, dispenser ve mastermetre ölçümlerinden hareketle bağıl hata yüzdesini hesaplayan basit bir Flutter uygulamasıdır.
+Bu proje, dispenser ve mastermetre ölçümlerinden hareketle bağıl hata yüzdesini hesaplayan basit bir Flutter uygulamasıdır.
 
 **Özellikler**
 - Dispenser ve mastermetre değerlerinden bağıl hata hesaplama
@@ -95,13 +95,11 @@ Bu `README.md` dosyasını daha da genişletmemi isterseniz (ör. API dokümanta
 
 ## Ekran Görüntüleri
 
-Aşağıdaki görüntüler projede kullanılmak üzere önerilen yer tutuculardır. Gerçek ekran görüntülerini `assets/screenshots/` dizinine ekleyin ve dosya adlarını aşağıdaki bağlantılarla eşleştirin.
+Gerçek ekran görüntülerini `assets/screenshots/` dizinindedir.
 
 ![Ana Ekran](assets/screenshots/main_screen.png)
 ![Hesaplama Sonucu](assets/screenshots/result_screen.png)
-![Ayarlar](assets/screenshots/settings_screen.png)
-
-> Not: Görselleri ekledikten sonra README içindeki linkler otomatik olarak görünecektir.
+![Ayarlar](assets/screenshots/settings_screen.png).
 
 ## Kullanım Akışları (Örnek Senaryolar)
 
@@ -129,20 +127,3 @@ Katkı yapmak istiyorsanız lütfen önce `CONTRIBUTING.md` dosyasını okuyun. 
 - PR açıklamasında değişiklikleri ve test adımlarını belirtin.
 
 ---
-README güncellendi: ekran görüntü yer tutucuları, kullanım akışları ve katkı yönergelerine bağlantılar eklendi.
-# bagil_hata
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
