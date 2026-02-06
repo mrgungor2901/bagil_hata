@@ -1,30 +1,74 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Bağıl Hata Hesaplayıcısı Testleri
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:bagil_hata/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('truncateToTwoDecimals Testleri', () {
+    test('İki ondalık basamağa yuvarlama - tam sayı', () {
+      expect(truncateToTwoDecimals(12), '12.00');
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    test('İki ondalık basamağa yuvarlama - bir basamak', () {
+      expect(truncateToTwoDecimals(12.5), '12.50');
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('İki ondalık basamağa yuvarlama - üç basamak kesiliyor', () {
+      expect(truncateToTwoDecimals(12.555), '12.55');
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    test('İki ondalık basamağa yuvarlama - sıfırdan küçük', () {
+      expect(truncateToTwoDecimals(0.4), '0.40');
+    });
+
+    test('İki ondalık basamağa yuvarlama - negatif sayı', () {
+      expect(truncateToTwoDecimals(-1.234), '-1.23');
+    });
+
+    test('İki ondalık basamağa yuvarlama - tam iki basamak', () {
+      expect(truncateToTwoDecimals(12.34), '12.34');
+    });
+  });
+
+  group('Bağıl Hata Hesaplama Mantığı', () {
+    test('Uygun aralık içinde - pozitif hata', () {
+      const double dispenser = 12.50;
+      const double mastermetre = 12.45;
+      final double hata = ((dispenser - mastermetre) / mastermetre) * 100;
+      
+      expect(hata >= -1 && hata <= 1, true);
+    });
+
+    test('Uygun aralık içinde - negatif hata', () {
+      const double dispenser = 12.40;
+      const double mastermetre = 12.45;
+      final double hata = ((dispenser - mastermetre) / mastermetre) * 100;
+      
+      expect(hata >= -1 && hata <= 1, true);
+    });
+
+    test('Uygun aralık dışında - çok yüksek', () {
+      const double dispenser = 15.0;
+      const double mastermetre = 12.0;
+      final double hata = ((dispenser - mastermetre) / mastermetre) * 100;
+      
+      expect(hata > 1, true);
+    });
+
+    test('Uygun aralık dışında - çok düşük', () {
+      const double dispenser = 10.0;
+      const double mastermetre = 12.0;
+      final double hata = ((dispenser - mastermetre) / mastermetre) * 100;
+      
+      expect(hata < -1, true);
+    });
+
+    test('Tam eşit değerler - sıfır hata', () {
+      const double dispenser = 12.50;
+      const double mastermetre = 12.50;
+      final double hata = ((dispenser - mastermetre) / mastermetre) * 100;
+      
+      expect(hata, 0.0);
+    });
   });
 }

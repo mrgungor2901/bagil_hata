@@ -1,4 +1,4 @@
-package com.example.bagil_hata
+package com.bagilhata.app
 
 import io.flutter.embedding.android.FlutterActivity
 

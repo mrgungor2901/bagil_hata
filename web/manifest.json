@@ -1,11 +1,11 @@
 {
-    "name": "bagil_hata",
-    "short_name": "bagil_hata",
+    "name": "Bağıl Hata Hesaplayıcısı",
+    "short_name": "Bağıl Hata",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#004E92",
+    "theme_color": "#004E92",
+    "description": "Dispenser ve mastermetre bağıl hata hesaplama uygulaması.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
