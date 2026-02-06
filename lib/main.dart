@@ -78,24 +78,24 @@ class AyarlarAdapter extends TypeAdapter<Ayarlar> {
   Ayarlar read(BinaryReader reader) {
     return Ayarlar(
       toleransDegeri: reader.readDouble(),
-      koyu_tema: reader.readBool(),
+      koyuTema: reader.readBool(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Ayarlar obj) {
     writer.writeDouble(obj.toleransDegeri);
-    writer.writeBool(obj.koyu_tema);
+    writer.writeBool(obj.koyuTema);
   }
 }
 
 class Ayarlar {
   final double toleransDegeri;
-  final bool koyu_tema;
+  final bool koyuTema;
 
   Ayarlar({
     this.toleransDegeri = 1.0,
-    this.koyu_tema = false,
+    this.koyuTema = false,
   });
 }
 
@@ -121,7 +121,7 @@ class _BagilHataAppState extends State<BagilHataApp> {
       final ayarlar = box.get('ayarlar', defaultValue: Ayarlar())!;
       if (mounted) {
         setState(() {
-          koyuTema = ayarlar.koyu_tema;
+          koyuTema = ayarlar.koyuTema;
         });
       }
     } catch (e) {
@@ -156,7 +156,6 @@ class _BagilHataAppState extends State<BagilHataApp> {
           seedColor: const Color(0xFF00BCD4), // Cyan accent
           brightness: Brightness.dark,
         ).copyWith(
-          background: const Color(0xFF0A0E21),
           surface: const Color(0xFF1D1E33),
           primary: const Color(0xFF00BCD4),
           secondary: const Color(0xFF8C52FF),
@@ -384,18 +383,18 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: isDark 
-                            ? const Color(0xFF1D1E33).withOpacity(0.8)
-                            : Colors.white.withOpacity(0.2),
+                            ? const Color(0xCC1D1E33)
+                            : const Color(0x33FFFFFF),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
                           color: isDark 
-                              ? const Color(0xFF00BCD4).withOpacity(0.3)
+                              ? const Color(0x4D00BCD4)
                               : Colors.white30,
                           width: 1.5,
                         ),
-                        boxShadow: isDark ? [
+                          boxShadow: isDark ? [
                           BoxShadow(
-                            color: const Color(0xFF00BCD4).withOpacity(0.1),
+                            color: const Color(0x1A00BCD4),
                             blurRadius: 20,
                             spreadRadius: 2,
                           ),
@@ -445,8 +444,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     elevation: isDark ? 8 : 2,
                                     shadowColor: isDark 
-                                        ? const Color(0xFF00BCD4).withOpacity(0.5)
-                                        : Colors.black26,
+                                      ? const Color(0x8000BCD4)
+                                      : Colors.black26,
                                   ),
                                 ),
                               ),
@@ -490,7 +489,7 @@ class _HomePageState extends State<HomePage> {
                                       color: isDark ? const Color(0xFF1D1E33) : Colors.white,
                                       borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                                       border: isDark ? Border.all(
-                                        color: const Color(0xFF00BCD4).withOpacity(0.3),
+                                        color: const Color(0x4D00BCD4),
                                         width: 1,
                                       ) : null,
                                     ),
@@ -628,7 +627,7 @@ class _HomePageState extends State<HomePage> {
                                                         shape: RoundedRectangleBorder(
                                                           borderRadius: BorderRadius.circular(12),
                                                           side: isDark ? BorderSide(
-                                                            color: const Color(0xFF00BCD4).withOpacity(0.2),
+                                                            color: const Color(0x3300BCD4),
                                                             width: 1,
                                                           ) : BorderSide.none,
                                                         ),
@@ -786,9 +785,7 @@ class _HomePageState extends State<HomePage> {
           fontWeight: FontWeight.bold,
           shadows: [
             Shadow(
-              color: isDark 
-                  ? const Color(0xFF00BCD4).withOpacity(0.5)
-                  : Colors.white.withOpacity(0.8),
+              color: isDark ? const Color(0x8000BCD4) : const Color(0xCCFFFFFF),
               offset: const Offset(0, 0),
               blurRadius: isDark ? 8 : 4,
             ),
@@ -796,22 +793,24 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         filled: true,
-        fillColor: isDark 
-            ? const Color(0xFF0A0E21).withOpacity(0.6)
-            : Colors.white.withOpacity(0.95),
+        fillColor: isDark ? const Color(0x990A0E21) : const Color(0xF2FFFFFF),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: isDark ? BorderSide(
-            color: const Color(0xFF00BCD4).withOpacity(0.3),
-            width: 1,
-          ) : BorderSide.none,
+          borderSide: isDark
+              ? BorderSide(
+                  color: const Color(0x4D00BCD4),
+                  width: 1,
+                )
+              : BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: isDark ? BorderSide(
-            color: const Color(0xFF00BCD4).withOpacity(0.2),
-            width: 1,
-          ) : BorderSide.none,
+          borderSide: isDark
+              ? BorderSide(
+                  color: const Color(0x3300BCD4),
+                  width: 1,
+                )
+              : BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -845,7 +844,7 @@ class _AyarlarPageState extends State<AyarlarPage> {
       final box = Hive.box<Ayarlar>('ayarlar');
       final ayarlar = box.get('ayarlar', defaultValue: Ayarlar())!;
       tolerans = ayarlar.toleransDegeri;
-      koyuTema = ayarlar.koyu_tema;
+      koyuTema = ayarlar.koyuTema;
     } catch (e) {
       // Web'de hata olursa varsayılan değerleri kullan
       tolerans = 1.0;
@@ -855,7 +854,7 @@ class _AyarlarPageState extends State<AyarlarPage> {
 
   Future<void> kaydet() async {
     final box = Hive.box<Ayarlar>('ayarlar');
-    await box.put('ayarlar', Ayarlar(toleransDegeri: tolerans, koyu_tema: koyuTema));
+    await box.put('ayarlar', Ayarlar(toleransDegeri: tolerans, koyuTema: koyuTema));
     
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -885,7 +884,7 @@ class _AyarlarPageState extends State<AyarlarPage> {
         backgroundColor: isDark ? const Color(0xFF0A0E21) : Colors.blueAccent,
         foregroundColor: isDark ? const Color(0xFF00BCD4) : Colors.white,
         elevation: isDark ? 4 : 0,
-        shadowColor: isDark ? const Color(0xFF00BCD4).withOpacity(0.3) : null,
+        shadowColor: isDark ? const Color(0x4D00BCD4) : null,
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -907,7 +906,7 @@ class _AyarlarPageState extends State<AyarlarPage> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: const Color(0x1A000000),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -942,8 +941,8 @@ class _AyarlarPageState extends State<AyarlarPage> {
                     label: '±${tolerans.toStringAsFixed(2)}%',
                     activeColor: isDark ? const Color(0xFF00BCD4) : Colors.blueAccent,
                     inactiveColor: isDark 
-                        ? const Color(0xFF00BCD4).withOpacity(0.2)
-                        : Colors.grey[300],
+                      ? const Color(0x3300BCD4)
+                      : Colors.grey[300],
                     onChanged: (value) {
                       setState(() {
                         tolerans = value;
@@ -984,18 +983,18 @@ class _AyarlarPageState extends State<AyarlarPage> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: isDark 
-                    ? const Color(0xFF1D1E33).withOpacity(0.8)
+                    ? const Color(0xCC1D1E33)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(16),
                 border: isDark ? Border.all(
-                  color: const Color(0xFF00BCD4).withOpacity(0.3),
+                  color: const Color(0x4D00BCD4),
                   width: 1.5,
                 ) : null,
                 boxShadow: [
                   BoxShadow(
                     color: isDark 
-                        ? const Color(0xFF00BCD4).withOpacity(0.1)
-                        : Colors.black.withOpacity(0.1),
+                        ? const Color(0x1A00BCD4)
+                        : const Color(0x1A000000),
                     blurRadius: isDark ? 20 : 10,
                     spreadRadius: isDark ? 2 : 0,
                     offset: const Offset(0, 5),
@@ -1035,8 +1034,8 @@ class _AyarlarPageState extends State<AyarlarPage> {
                             koyuTema = value;
                           });
                         },
-                        activeColor: const Color(0xFF00BCD4),
-                        activeTrackColor: const Color(0xFF00BCD4).withOpacity(0.5),
+                        activeThumbColor: const Color(0xFF00BCD4),
+                        activeTrackColor: const Color(0x8000BCD4),
                       ),
                     ],
                   ),
@@ -1084,12 +1083,12 @@ class _AyarlarPageState extends State<AyarlarPage> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: isDark 
-                    ? const Color(0xFF1D1E33).withOpacity(0.6)
-                    : Colors.white.withOpacity(0.9),
+                    ? const Color(0x991D1E33)
+                    : const Color(0xE6FFFFFF),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isDark 
-                      ? const Color(0xFF00BCD4).withOpacity(0.3)
+                      ? const Color(0x4D00BCD4)
                       : Colors.blue[200]!,
                   width: 1.5,
                 ),
